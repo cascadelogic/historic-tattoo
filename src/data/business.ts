@@ -1,8 +1,8 @@
 export const business = {
   name: "Historic Tattoo",
   legalName: "Historic Tattoo",
-  foundingYear: 2007,
-  tagline: "Portland's home of traditional American tattooing since 2007.",
+  foundingYear: 2008,
+  tagline: "Portland's home of traditional American tattooing since 2008.",
 
   phone: "(503) 236-3440",
   phoneRaw: "+15032363440",

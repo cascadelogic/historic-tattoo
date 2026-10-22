@@ -9,11 +9,11 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Tattoo Artists | Historic Tattoo — Portland, OR",
   description:
-    "Meet the 8 traditional American tattoo artists at Historic Tattoo in SE Portland, OR. 109 years of combined experience. Walk-ins welcome daily 11am–7pm at 2001 SE 50th Ave.",
+    "Meet the 9 traditional American tattoo artists at Historic Tattoo in SE Portland, OR. 109 years of combined experience. Walk-ins welcome daily 11am–7pm at 2001 SE 50th Ave.",
   openGraph: {
     title: "Our Tattoo Artists — Historic Tattoo Portland, OR",
     description:
-      "8 traditional American tattoo artists with 109 years combined experience. Walk-ins welcome daily in SE Portland.",
+      "9 traditional American tattoo artists with 109 years combined experience. Walk-ins welcome daily in SE Portland.",
     url: "https://historictattoo.com/artists",
     siteName: "Historic Tattoo",
     locale: "en_US",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tattoo Artists — Historic Tattoo Portland, OR",
     description:
-      "Meet our 8 traditional American tattoo artists. 109 years combined experience. Walk-ins daily 11am–7pm.",
+      "Meet our 9 traditional American tattoo artists. 109 years combined experience. Walk-ins daily 11am–7pm.",
   },
   alternates: {
     canonical: "https://historictattoo.com/artists",
@@ -34,6 +34,7 @@ const crumbSchema = breadcrumbSchema([
   { name: "Home", url: business.url },
   { name: "Artists", url: `${business.url}/artists` },
 ]);
+const cdnUrl = (src: string, fmt: string) => src.startsWith("/") ? src : `${src}?format=${fmt}`;
 
 export default function ArtistsPage() {
   return (
@@ -51,7 +52,7 @@ export default function ArtistsPage() {
             <span className="sr-only"> — Traditional Tattoo Artists in Portland, OR</span>
           </h1>
           <p className="font-body text-ht-cream/60 max-w-xl mx-auto">
-            Eight traditional American tattoo artists at Portland&apos;s Historic Tattoo. Click any artist to view their portfolio, or message them on Instagram to book.
+            Nine traditional American tattoo artists at Portland&apos;s Historic Tattoo. Click any artist to view their portfolio, or message them on Instagram to book.
           </p>
           <OrnamentalDivider className="mt-4" />
         </div>
@@ -71,7 +72,7 @@ export default function ArtistsPage() {
                     <div className="absolute inset-[8px] rounded-full overflow-hidden">
                       {artist.photo ? (
                         <Image
-                          src={`${artist.photo}?format=300w`}
+                          src={cdnUrl(artist.photo!, "300w")}
                           alt={`${artist.name} — tattoo artist at Historic Tattoo Portland`}
                           fill
                           className="object-cover"
@@ -107,7 +108,7 @@ export default function ArtistsPage() {
                     rel="noopener noreferrer"
                     className="btn-secondary !py-2 !px-6 text-xs"
                   >
-                    Instagram
+                    {artist.igHandle}
                   </a>
                 </div>
               </div>
@@ -121,7 +122,7 @@ export default function ArtistsPage() {
                   {artist.portfolio.map((img, i) => (
                     <div key={i} className="relative aspect-square overflow-hidden bg-ht-gray warm-glow">
                       <Image
-                        src={`${img.src}?format=500w`}
+                        src={cdnUrl(img.src, "500w")}
                         alt={img.alt}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"

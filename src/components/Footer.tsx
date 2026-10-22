@@ -15,10 +15,10 @@ export default function Footer() {
               Historic Tattoo
             </h3>
             <p className="font-display text-[10px] tracking-[0.3em] text-ht-gold uppercase mb-4">
-              Portland, Oregon · Est. 2007
+              Portland, Oregon · Est. 2008
             </p>
             <p className="text-ht-cream/60 text-sm font-body leading-relaxed">
-              Portland&apos;s home of traditional American tattooing since 2007.
+              Portland&apos;s home of traditional American tattooing since 2008.
               Thousands of hand-painted designs plus custom work.
             </p>
           </div>
@@ -62,15 +62,17 @@ export default function Footer() {
                 href="https://www.instagram.com/historictattoo/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Historic Tattoo on Instagram"
                 className="font-display text-xs tracking-widest uppercase text-ht-cream/60 hover:text-ht-red transition-colors"
               >
                 Instagram
               </a>
-              <span className="text-ht-red/40">|</span>
+              <span className="text-ht-red/40" aria-hidden="true">|</span>
               <a
                 href="https://www.yelp.com/biz/historic-tattoo-portland"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Historic Tattoo on Yelp"
                 className="font-display text-xs tracking-widest uppercase text-ht-cream/60 hover:text-ht-red transition-colors"
               >
                 Yelp
@@ -81,9 +83,10 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-12 pt-6 border-t border-ht-red/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-ht-cream/30 font-body tracking-widest uppercase">
-            &copy; {new Date().getFullYear()} Historic Tattoo. All rights reserved.
-          </p>
+          <div className="text-xs text-ht-cream/30 font-body tracking-widest uppercase space-y-1">
+            <p>&copy; {new Date().getFullYear()} Historic Tattoo. All rights reserved.</p>
+            <p className="text-ht-cream/20">Must be 18+ with valid photo ID. Oregon state law.</p>
+          </div>
           <nav className="flex gap-6">
             {[
               { href: "/about", label: "About" },
@@ -93,6 +96,7 @@ export default function Footer() {
               { href: "/contact", label: "Contact" },
               { href: "/faq", label: "FAQ" },
               { href: "/aftercare", label: "Aftercare" },
+              { href: "/privacy", label: "Privacy" },
             ].map((l) => (
               <Link
                 key={l.href}

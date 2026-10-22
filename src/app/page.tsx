@@ -19,9 +19,9 @@ import { artists as allArtists } from "@/data/artists";
 import { business } from "@/data/business";
 
 const trustStats = [
-  { num: "17+", label: "Years in Business", icon: "anchor" },
+  { num: "18+", label: "Years in Business", icon: "anchor" },
   { num: "109", label: "Years Combined Experience", icon: "star" },
-  { num: "8+", label: "Artists on Staff", icon: "eagle" },
+  { num: "9", label: "Artists on Staff", icon: "eagle" },
   { num: "1,000s", label: "Hand-Painted Designs", icon: "rose" },
 ];
 
@@ -57,16 +57,47 @@ const services = [
 
 const homeArtists = allArtists.filter((a) => a.photo !== null);
 
+/* Only append Squarespace CDN format params to external URLs; local images are served as-is */
+const cdnUrl = (src: string, fmt: string) => src.startsWith("/") ? src : `${src}?format=${fmt}`;
+
+/* Hero images — hand-picked tattoo WORK (not headshots) for visual impact.
+   Chosen for subject variety (eagle, lady head, snake, heart/dagger) across 4 different artists. */
+const heroImages = {
+  /* Mobile background — Craig's tattoo work, bold & iconic */
+  mobile: { src: "/portfolio/craig-brown/01.jpg", alt: "Traditional American tattoo by Craig Brown at Historic Tattoo Portland" },
+  /* Desktop 2×2 collage — one piece per artist, varied subjects */
+  collage: [
+    { src: "/portfolio/craig-brown/01.jpg", alt: "Traditional American tattoo by Craig Brown at Historic Tattoo Portland" },
+    { src: "/hero/abbie-ladyhead.jpg", alt: "Classic lady head tattoo by Abbie Fitzpatrick at Historic Tattoo Portland" },
+    { src: "/portfolio/tony-vyeda/03.jpg", alt: "Traditional snake tattoo by Tony J. Vyeda at Historic Tattoo Portland" },
+    { src: "/hero/krystian-heartdagger.jpg", alt: "Bold heart and dagger tattoo by Krystian Schneider at Historic Tattoo Portland" },
+  ],
+};
+
+/* Portfolio grid — tattoo work images for the "The Work" section */
 const portfolioGrid = [
-  { src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752260914078-GP6VEZ0QUIHLSBNVQ9VD/image0+%283%29.jpeg", alt: "Traditional American tattoo by Craig Brown at Historic Tattoo Portland" },
-  { src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752153066661-XCKV7C47MASE3QH8V23O/Screenshot%2B2025-07-10%2Bat%2B6.10.25%25E2%2580%25AFAM.jpg", alt: "Bold traditional tattoo work from Historic Tattoo in SE Portland" },
-  { src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752154031208-0211B5W3OOSB6L1EDEFZ/IMG_1250.jpeg", alt: "Classic American tattoo flash by Adam DeFiglio at Historic Tattoo Portland" },
-  { src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752260696730-T41YHUXASE5MA2MH3ZMQ/image0.jpeg", alt: "Traditional tattoo by Tony J. Vyeda at Historic Tattoo Portland Oregon" },
-  { src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752153767790-VGSGPM17EFWTG09CORM9/unnamed.jpg", alt: "Hand-painted flash tattoo by Abbie Fitzpatrick at Historic Tattoo Portland" },
-  { src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752260917349-BJ3M63BOOWGVAC35OGPP/image4+%282%29.jpeg", alt: "Traditional American eagle tattoo from Historic Tattoo SE Portland" },
-  { src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752153794631-H86G5RKEWRJXQLRAO3FA/IMG_4755.jpeg", alt: "Classic rose tattoo from Portland's Historic Tattoo shop" },
-  { src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752154040779-FZOEPCI40Z7LJEEMY6RF/IMG_6676.jpeg", alt: "Bold lines and solid color traditional tattoo at Historic Tattoo Portland" },
-  { src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752260696744-G183ZP02TIQ015UKBRTH/image2.jpeg", alt: "Walk-in flash tattoo from Historic Tattoo in Portland Oregon" },
+  { src: "/portfolio/craig-brown/01.jpg", alt: "Traditional American tattoo by Craig Brown at Historic Tattoo Portland" },
+  { src: "/hero/abbie-ladyhead.jpg", alt: "Classic lady head tattoo by Abbie Fitzpatrick at Historic Tattoo Portland" },
+  { src: "/portfolio/tony-vyeda/03.jpg", alt: "Traditional snake tattoo by Tony J. Vyeda at Historic Tattoo Portland" },
+  { src: "/hero/krystian-heartdagger.jpg", alt: "Bold heart and dagger tattoo by Krystian Schneider at Historic Tattoo Portland" },
+  { src: "/portfolio/craig-brown/02.jpg", alt: "Bold traditional flash by Craig Brown at Historic Tattoo Portland" },
+  { src: "/portfolio/adam-defiglio/01.jpg", alt: "Classic traditional tattoo by Adam DeFiglio at Historic Tattoo SE Portland" },
+  { src: "/hero/abbie-flower.jpg", alt: "Traditional flower bouquet tattoo by Abbie Fitzpatrick at Historic Tattoo Portland" },
+  { src: "/portfolio/tony-vyeda/01.jpg", alt: "Traditional rose and banner tattoo by Tony J. Vyeda at Historic Tattoo Portland" },
+  { src: "/portfolio/brad-delay/02.jpg", alt: "Traditional American tattoo by Brad Delay at Historic Tattoo Portland" },
+];
+
+/* Instagram grid — different images from the portfolio grid so the homepage doesn't repeat */
+const instagramGrid = [
+  { src: "/portfolio/craig-brown/03.jpg", alt: "Traditional tattoo by Craig Brown at Historic Tattoo Portland" },
+  { src: "/portfolio/abbie-fitzpatrick/01.jpg", alt: "Traditional tattoo by Abbie Fitzpatrick at Historic Tattoo Portland" },
+  { src: "/portfolio/blane/02.jpg", alt: "Traditional tattoo by Blane at Historic Tattoo Portland" },
+  { src: "/portfolio/mishka/02.jpg", alt: "Traditional tattoo by Mishka at Historic Tattoo Portland" },
+  { src: "/portfolio/krystian-schneider/01.jpg", alt: "Traditional tattoo by Krystian Schneider at Historic Tattoo Portland" },
+  { src: "/portfolio/adam-defiglio/02.jpg", alt: "Traditional tattoo by Adam DeFiglio at Historic Tattoo Portland" },
+  { src: "/portfolio/one-eyed-jon/01.jpg", alt: "Traditional tattoo by One Eyed Jon at Historic Tattoo Portland" },
+  { src: "/portfolio/craig-brown/04.jpg", alt: "Traditional tattoo by Craig Brown at Historic Tattoo Portland" },
+  { src: "/portfolio/abbie-fitzpatrick/03.jpg", alt: "Traditional tattoo by Abbie Fitzpatrick at Historic Tattoo Portland" },
 ];
 
 const reviews = [
@@ -109,67 +140,88 @@ export default function Home() {
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="relative min-h-[75vh] sm:min-h-[92vh] flex flex-col items-center justify-center text-center px-4 py-16 sm:pt-8 overflow-hidden diagonal-stripes">
-        {/* Background watermark */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none opacity-[0.03]">
-          <AnchorIcon className="w-full h-full text-ht-cream" />
-        </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full bg-ht-red/5 blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 max-w-4xl mx-auto">
-          {/* Typographic hero */}
-          <div className="flex justify-center mb-6">
-            <StampBadge>Est. 2007 · Portland, OR</StampBadge>
-          </div>
-
-          <h1 className="font-display font-bold uppercase leading-none mb-4">
-            <span className="block text-5xl sm:text-7xl md:text-8xl text-ht-cream tracking-wide">Historic</span>
-            <span className="block text-5xl sm:text-7xl md:text-8xl text-ht-red tracking-wide">Tattoo</span>
-            <span className="sr-only"> — Traditional American Tattoo Shop in Portland, Oregon</span>
-          </h1>
-
-          <p className="font-body text-ht-cream/70 text-lg sm:text-xl max-w-xl mx-auto leading-relaxed mb-3">
-            17+ years of traditional American tattooing. 109 years of combined artist experience.
-            Thousands of hand-painted flash designs — walk-ins welcome every day.
-          </p>
-
-          <p className="font-display text-sm tracking-widest text-ht-gold uppercase mb-8">
-            <TradStar className="w-3 h-3 inline text-ht-gold mr-1" />
-            <TradStar className="w-3 h-3 inline text-ht-gold mr-1" />
-            <TradStar className="w-3 h-3 inline text-ht-gold mr-1" />
-            <TradStar className="w-3 h-3 inline text-ht-gold mr-1" />
-            <TradStar className="w-3 h-3 inline text-ht-gold mr-2" />
-            {business.reviews.google.rating} Stars · {business.reviews.google.count}+ Reviews on Google
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
-            <a href={business.phoneHref} className="btn-primary">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
-              Call {business.phone}
-            </a>
-            <Link href="/get-what-you-get" className="btn-secondary">
-              Get What You Get
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
-            </Link>
-            <a
-              href={business.maps.directions}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-secondary"
-            >
-              Get Directions
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            </a>
-          </div>
-
-          <p className="font-body text-xs text-ht-cream/40 tracking-widest uppercase">
-            {business.address.street} · Open Daily {business.hours.short} · Walk-ins Always Welcome
-          </p>
+      <section className="relative overflow-hidden">
+        {/* Mobile: portfolio image background with overlay */}
+        <div className="absolute inset-0 lg:hidden">
+          <Image
+            src={cdnUrl(heroImages.mobile.src, "1000w")}
+            alt={heroImages.mobile.alt}
+            fill
+            className="object-cover"
+            sizes="100vw"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-ht-black/80 via-ht-black/70 to-ht-black/90" />
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 opacity-30">
-          <div className="w-px h-12 bg-ht-cream animate-pulse mx-auto" />
+        {/* Desktop: split layout */}
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[75vh] sm:min-h-[92vh]">
+            {/* Left: text + CTAs */}
+            <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-24 sm:py-16 text-center lg:text-left">
+              <div className="flex justify-center lg:justify-start mb-6">
+                <StampBadge>Est. 2008 · Portland, OR</StampBadge>
+              </div>
+
+              <h1 className="font-display font-bold uppercase leading-none mb-4">
+                <span className="block text-5xl sm:text-7xl lg:text-8xl text-ht-cream tracking-wide">Historic</span>
+                <span className="block text-5xl sm:text-7xl lg:text-8xl text-ht-red tracking-wide">Tattoo</span>
+                <span className="sr-only"> — Traditional American Tattoo Shop in Portland, Oregon</span>
+              </h1>
+
+              <p className="font-body text-ht-cream/70 text-lg sm:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed mb-3">
+                18+ years of traditional American tattooing. 109 years of combined artist experience.
+                Thousands of hand-painted flash designs — walk-ins welcome every day.
+              </p>
+
+              <p className="font-display text-sm tracking-widest text-ht-gold uppercase mb-8">
+                <TradStar className="w-3 h-3 inline text-ht-gold mr-1" />
+                <TradStar className="w-3 h-3 inline text-ht-gold mr-1" />
+                <TradStar className="w-3 h-3 inline text-ht-gold mr-1" />
+                <TradStar className="w-3 h-3 inline text-ht-gold mr-1" />
+                <TradStar className="w-3 h-3 inline text-ht-gold mr-2" />
+                {business.reviews.google.rating} Stars · {business.reviews.google.count}+ Reviews on Google
+              </p>
+
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start items-center sm:items-stretch mb-6">
+                <a href={business.phoneHref} className="btn-primary whitespace-nowrap flex-shrink-0">
+                  <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+                  Call Now
+                </a>
+                <Link href="/get-what-you-get" className="btn-secondary whitespace-nowrap flex-shrink-0">
+                  Get What You Get
+                  <svg className="w-4 h-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </Link>
+              </div>
+
+              <p className="font-body text-xs text-ht-cream/40 tracking-widest uppercase">
+                {business.address.street} · Open Daily {business.hours.short} · Walk-ins Welcome
+              </p>
+            </div>
+
+            {/* Right: portfolio collage (desktop only) */}
+            <div className="hidden lg:grid grid-cols-2 grid-rows-2 gap-1.5 p-4 my-8 mr-8 relative">
+              {heroImages.collage.map((img, i) => (
+                <div key={i} className={`relative overflow-hidden bg-ht-gray ${i === 0 ? "rounded-tl-lg" : ""} ${i === 1 ? "rounded-tr-lg" : ""} ${i === 2 ? "rounded-bl-lg" : ""} ${i === 3 ? "rounded-br-lg" : ""}`}>
+                  <Image
+                    src={cdnUrl(img.src, "750w")}
+                    alt={img.alt}
+                    fill
+                    className="object-cover hover:scale-105 transition-transform duration-700"
+                    sizes="25vw"
+                    priority
+                  />
+                  <div className="absolute inset-0 border border-ht-gold/10 pointer-events-none" />
+                </div>
+              ))}
+              {/* Overlay link */}
+              <Link href="/gallery" className="absolute bottom-12 right-12 btn-tertiary text-xs bg-ht-black/70 backdrop-blur-sm px-3 py-1.5 rounded-sm">
+                View Gallery
+                <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -253,7 +305,7 @@ export default function Home() {
             {portfolioGrid.map((img, i) => (
               <div key={i} className="relative aspect-square overflow-hidden bg-ht-black group warm-glow">
                 <Image
-                  src={`${img.src}?format=500w`}
+                  src={cdnUrl(img.src, "500w")}
                   alt={img.alt}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -291,10 +343,10 @@ export default function Home() {
             </h2>
             <div className="space-y-4 font-body text-ht-cream/70 leading-relaxed">
               <p>
-                Historic Tattoo has been the home of traditional American tattooing in Portland since 2007 — that&apos;s over 17 years of bold lines, solid color, and timeless imagery.
+                Historic Tattoo has been the home of traditional American tattooing in Portland since 2008 — that&apos;s over 18 years of bold lines, solid color, and timeless imagery.
               </p>
               <p>
-                Our eight artists bring 109 years of combined experience to every tattoo. Whether it&apos;s flash off the wall or a fully custom piece, you&apos;re getting the real deal.
+                Our nine artists bring 109 years of combined experience to every tattoo. Whether it&apos;s flash off the wall or a fully custom piece, you&apos;re getting the real deal.
               </p>
               <p>
                 We&apos;re also the only shop in Portland with Get What You Get and Tattoo Plinko — two of the most fun ways to get tattooed anywhere in the country.
@@ -315,7 +367,7 @@ export default function Home() {
             {[
               { Icon: AnchorIcon, title: "Walk-Ins Always Welcome", desc: "No appointment needed. Come in any day between 11am and 7pm." },
               { Icon: RoseIcon, title: "Traditional American Style", desc: "Bold lines, solid color, classic imagery that lasts a lifetime." },
-              { Icon: EagleIcon, title: "17+ Years of Excellence", desc: "Portland's most trusted traditional tattoo shop since 2007." },
+              { Icon: EagleIcon, title: "18+ Years of Excellence", desc: "Portland's most trusted traditional tattoo shop since 2008." },
               { Icon: HeartIcon, title: "109 Years Experience", desc: "Our team's combined experience means world-class tattooing every time." },
             ].map((f) => (
               <div key={f.title} className="parchment-card p-5 relative">
@@ -348,7 +400,7 @@ export default function Home() {
                 <div className="relative w-20 h-20 rounded-full overflow-hidden mx-auto mb-3 border-[3px] border-ht-red group-hover:border-ht-gold transition-colors">
                   <div className="absolute inset-[3px] rounded-full border border-dashed border-ht-red/30 z-10 pointer-events-none" />
                   <Image
-                    src={`${artist.photo}?format=300w`}
+                    src={cdnUrl(artist.photo!, "300w")}
                     alt={`${artist.name} — tattoo artist at Historic Tattoo Portland`}
                     fill
                     className="object-cover"
@@ -478,7 +530,7 @@ export default function Home() {
 
           {/* Flash-sheet-style border grid */}
           <div className="grid grid-cols-3 gap-1 sm:gap-2 mb-8 grunge-border p-1 sm:p-2">
-            {portfolioGrid.slice(0, 9).map((img, i) => (
+            {instagramGrid.map((img, i) => (
               <a
                 key={i}
                 href={business.social.instagram}
@@ -487,7 +539,7 @@ export default function Home() {
                 className="relative aspect-square overflow-hidden bg-ht-black group block warm-glow"
               >
                 <Image
-                  src={`${img.src}?format=500w`}
+                  src={cdnUrl(img.src, "500w")}
                   alt={img.alt}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"

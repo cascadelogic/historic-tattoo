@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MobileCTA from "@/components/MobileCTA";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
+import MetaPixel from "@/components/MetaPixel";
 
 const oswald = Oswald({
   subsets: ["latin"],
@@ -24,32 +26,50 @@ const unifraktur = UnifrakturCook({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  other: {
+    "theme-color": "#0a0a08",
+  },
   title: "Historic Tattoo | Traditional American Tattoo Shop — Portland, OR",
   description:
-    "Portland's #1 traditional American tattoo shop since 2007. Walk-ins welcome daily 11am–7pm at 2001 SE 50th Ave, SE Portland. Home of Get What You Get, Tattoo Plinko, and 1,000s of hand-painted flash designs.",
+    "Portland's #1 traditional American tattoo shop since 2008. Walk-ins welcome daily 11am–7pm at 2001 SE 50th Ave, SE Portland. Best tattoo shop near me — home of Get What You Get, Tattoo Plinko, and 1,000s of hand-painted flash designs.",
   keywords: [
+    "tattoo Portland",
+    "tattoo near me",
+    "tattoo shop Portland",
+    "tattoo shop near me",
     "tattoo shop Portland Oregon",
     "traditional American tattoo Portland",
+    "best tattoo shop Portland",
+    "Portland tattoo shop",
     "get what you get tattoo",
     "tattoo plinko Portland",
     "historic tattoo Portland",
     "SE Portland tattoo shop",
     "walk-in tattoo Portland",
     "flash tattoo Portland",
-    "best tattoo shop Portland",
-    "tattoo near me Portland",
+    "traditional tattoo near me",
+    "tattoo artists Portland Oregon",
   ],
   openGraph: {
     title: "Historic Tattoo | Traditional American Tattoos — Portland, OR",
     description:
-      "Portland's home of traditional American tattooing since 2007. Walk-ins welcome daily 11am–7pm. Home of Get What You Get & Tattoo Plinko.",
+      "Portland's home of traditional American tattooing since 2008. Walk-ins welcome daily 11am–7pm. Home of Get What You Get & Tattoo Plinko.",
     url: "https://historictattoo.com",
     siteName: "Historic Tattoo",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1494189325899-CI4BWN033NVOAAPGTGM5/Historic+Tattoo?format=1500w",
+        url: "https://historictattoo.com/hero/shop-front.jpg",
         width: 1200,
         height: 630,
         alt: "Historic Tattoo — Portland, OR",
@@ -59,7 +79,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Historic Tattoo | Traditional American Tattoos — Portland, OR",
-    description: "Portland's home of traditional American tattooing since 2007. Walk-ins welcome daily 11am–7pm.",
+    description: "Portland's home of traditional American tattooing since 2008. Walk-ins welcome daily 11am–7pm.",
   },
   alternates: {
     canonical: "https://historictattoo.com",
@@ -72,13 +92,13 @@ const localBusinessSchema = {
   name: "Historic Tattoo",
   alternateName: "Historic Tattoo Portland",
   description:
-    "Portland's home of traditional American tattooing since 2007. Over 17 years in business with 109 years of combined artist experience. Home of the Get What You Get and Tattoo Plinko experiences. Thousands of hand-painted flash designs plus custom work. Walk-ins welcome daily.",
+    "Portland's home of traditional American tattooing since 2008. Over 18 years in business with 9 artists and 109 years of combined experience. Home of Get What You Get and Tattoo Plinko. Thousands of hand-painted flash designs plus custom work. Walk-ins welcome daily.",
   url: "https://historictattoo.com",
   logo: "https://historictattoo.com/logo.png",
   image: "https://historictattoo.com/logo.png",
   telephone: "+15032363440",
   email: "historictattoo@gmail.com",
-  foundingDate: "2007",
+  foundingDate: "2008",
   address: {
     "@type": "PostalAddress",
     streetAddress: "2001 SE 50th Ave",
@@ -194,12 +214,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${oswald.variable} ${inter.variable} ${unifraktur.variable}`}>
       <head>
+        <meta name="theme-color" content="#0a0a08" />
+        <meta name="facebook-domain-verification" content="b0lvsnt0rai3fforwkxr0o4tvopb2o" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
       </head>
       <body className="font-body antialiased">
+        <GoogleAnalytics />
+        <MetaPixel />
         <Navbar />
         <main>{children}</main>
         <Footer />

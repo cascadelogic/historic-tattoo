@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { OrnamentalDivider, StampBadge } from "@/components/Decorations";
+import PortfolioGrid from "@/components/PortfolioGrid";
 import { artists, getArtistsWithPortfolios } from "@/data/artists";
 import { business } from "@/data/business";
 import { breadcrumbSchema } from "@/lib/schema";
@@ -9,7 +10,7 @@ import { breadcrumbSchema } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Tattoo Gallery | Historic Tattoo — Portland, OR",
   description:
-    "Browse traditional American tattoo work by all 8 artists at Historic Tattoo in Portland, OR. Eagles, roses, anchors, skulls, and more. Walk-ins welcome daily 11am–7pm.",
+    "Browse traditional American tattoo work by all 9 artists at Historic Tattoo in Portland, OR. Eagles, roses, anchors, skulls, and more. Best tattoo shop near me — walk-ins welcome daily 11am–7pm.",
   openGraph: {
     title: "Tattoo Gallery — Historic Tattoo Portland, OR",
     description:
@@ -38,12 +39,13 @@ const gallerySchema = {
   "@context": "https://schema.org",
   "@type": "ImageGallery",
   name: "Historic Tattoo Portfolio Gallery",
-  description: "Traditional American tattoo work by the artists at Historic Tattoo in Portland, Oregon.",
+  description: "Traditional American tattoo work by the 9 artists at Historic Tattoo in Portland, Oregon.",
   url: `${business.url}/gallery`,
   numberOfItems: artists.reduce((acc, a) => acc + a.portfolio.length, 0),
 };
 
 const artistsWithWork = getArtistsWithPortfolios();
+const cdnUrl = (src: string, fmt: string) => src.startsWith("/") ? src : `${src}?format=${fmt}`;
 
 export default function GalleryPage() {
   return (
@@ -56,11 +58,11 @@ export default function GalleryPage() {
         <div className="relative z-10">
           <StampBadge className="mb-4">The Work</StampBadge>
           <h1 className="font-display text-5xl sm:text-7xl font-bold uppercase text-ht-cream mb-4 mt-4">
-            Gallery
-            <span className="sr-only"> — Traditional Tattoo Portfolio from Historic Tattoo Portland, OR</span>
+            Tattoo Gallery
+            <span className="sr-only"> — Portland, OR Traditional Tattoo Portfolio</span>
           </h1>
           <p className="font-body text-ht-cream/60 max-w-xl mx-auto">
-            Bold lines, solid color, timeless imagery. Browse work from all of our artists.
+            Bold lines, solid color, timeless imagery. Browse traditional American tattoo work from all of our Portland artists.
           </p>
           <OrnamentalDivider className="mt-4" />
         </div>
@@ -92,7 +94,7 @@ export default function GalleryPage() {
                   {artist.photo && (
                     <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-ht-red flex-shrink-0">
                       <Image
-                        src={`${artist.photo}?format=200w`}
+                        src={cdnUrl(artist.photo!, "200w")}
                         alt={`${artist.name} at Historic Tattoo Portland`}
                         fill
                         className="object-cover"
@@ -114,18 +116,8 @@ export default function GalleryPage() {
                 </Link>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 grunge-border p-2 sm:p-3">
-                {artist.portfolio.map((img, i) => (
-                  <div key={i} className="relative aspect-square overflow-hidden bg-ht-gray group warm-glow">
-                    <Image
-                      src={`${img.src}?format=750w`}
-                      alt={img.alt}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 45vw, 25vw"
-                    />
-                  </div>
-                ))}
+              <div className="grunge-border p-2 sm:p-3">
+                <PortfolioGrid images={artist.portfolio} />
               </div>
 
               <div className="mt-4 sm:hidden text-center">

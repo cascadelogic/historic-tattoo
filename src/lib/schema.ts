@@ -57,6 +57,7 @@ export function personSchema(artist: {
   slug: string;
   specialty: string;
   bio: string;
+  ig: string;
   photo: string | null;
 }) {
   return {
@@ -64,13 +65,14 @@ export function personSchema(artist: {
     "@type": "Person",
     name: artist.name,
     jobTitle: "Tattoo Artist",
-    description: artist.bio,
+    description: artist.bio.split("\n\n")[0],
     worksFor: {
       "@type": "TattooParlor",
       name: business.name,
       url: business.url,
     },
     url: `${business.url}/artists/${artist.slug}`,
+    sameAs: [artist.ig],
     ...(artist.photo ? { image: artist.photo } : {}),
     knowsAbout: [artist.specialty, "Traditional American Tattoo", "Flash Tattoo"],
   };
