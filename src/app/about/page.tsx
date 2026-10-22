@@ -10,13 +10,13 @@ import {
 } from "@/components/Decorations";
 
 export const metadata: Metadata = {
-  title: "About Historic Tattoo — Portland's Traditional Tattoo Shop Since 2007",
+  title: "About Historic Tattoo — Portland's Traditional Tattoo Shop Since 2008",
   description:
-    "Historic Tattoo has been Portland's home of traditional American tattooing since 2007. Located in SE Portland's Foster-Powell neighborhood at 2001 SE 50th Ave. Walk-ins welcome daily.",
+    "Historic Tattoo has been Portland's home of traditional American tattooing since 2008. Located in SE Portland's Foster-Powell neighborhood at 2001 SE 50th Ave. Walk-ins welcome daily.",
   openGraph: {
-    title: "About Historic Tattoo — Portland's Traditional Tattoo Shop Since 2007",
+    title: "About Historic Tattoo — Portland's Traditional Tattoo Shop Since 2008",
     description:
-      "Portland's home of traditional American tattooing since 2007. 8 artists, 109 years combined experience, walk-ins welcome daily 11am–7pm.",
+      "Portland's home of traditional American tattooing since 2008. 8 artists, 109 years combined experience, walk-ins welcome daily 11am–7pm.",
     url: "https://historictattoo.com/about",
     siteName: "Historic Tattoo",
     locale: "en_US",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About Historic Tattoo — Portland, OR",
     description:
-      "Portland's home of traditional American tattooing since 2007. Walk-ins welcome daily 11am–7pm.",
+      "Portland's home of traditional American tattooing since 2008. Walk-ins welcome daily 11am–7pm.",
   },
   alternates: {
     canonical: "https://historictattoo.com/about",
@@ -39,7 +39,7 @@ export default function AboutPage() {
       {/* Page header */}
       <section className="pt-32 pb-16 px-4 text-center border-b-2 border-ht-red/20 diagonal-stripes relative">
         <div className="relative z-10">
-          <StampBadge className="mb-4">Est. 2007</StampBadge>
+          <StampBadge className="mb-4">Est. 2008</StampBadge>
           <h1 className="font-display text-5xl sm:text-7xl font-bold uppercase text-ht-cream mt-4">
             About Historic Tattoo
             <span className="sr-only"> — Portland&apos;s Traditional Tattoo Shop</span>
@@ -56,7 +56,7 @@ export default function AboutPage() {
           </BannerRibbon>
           <div className="space-y-6 font-body text-ht-cream/80 leading-relaxed text-lg mt-8">
             <p>
-              Historic Tattoo opened its doors in Portland, Oregon in 2007 with one mission: keep
+              Historic Tattoo opened its doors in Portland, Oregon in 2008 with one mission: keep
               traditional American tattooing alive and thriving. We&apos;re a shop built on a deep
               respect for the craft — bold lines, solid color, and classic imagery that stands the
               test of time.

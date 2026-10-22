@@ -60,7 +60,7 @@ const portfolioImages = [
     alt: "Traditional American eagle tattoo by Craig Brown at Historic Tattoo Portland Oregon",
   },
   {
-    src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752153829523-DTFX3ZI7DBF3T59IW3NL/IMG_6445.jpeg",
+    src: "/hero/abbie-ladyhead.jpg",
     alt: "Classic lady head tattoo by Abbie Fitzpatrick at walk-in tattoo shop Portland",
   },
   {
@@ -68,7 +68,7 @@ const portfolioImages = [
     alt: "Bold traditional flash tattoo by Adam DeFiglio at tattoo shop near me Portland",
   },
   {
-    src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752260698535-K9J0ULBJFDIZEWJCUL9S/image4.jpeg",
+    src: "/portfolio/tony-vyeda/03.jpg",
     alt: "Traditional snake tattoo by Tony Vyeda at best tattoo shop Portland Oregon",
   },
   {
@@ -76,7 +76,7 @@ const portfolioImages = [
     alt: "Traditional American tattoo by Brad Delay at Historic Tattoo walk-in tattoo shop Portland",
   },
   {
-    src: "https://images.squarespace-cdn.com/content/v1/590f374a1e5b6c8e16f091b5/1752153062265-WJ2RUIT1CANL265OOXLN/IMG_8260.jpeg",
+    src: "/hero/krystian-heartdagger.jpg",
     alt: "Bold heart and dagger tattoo by Krystian Schneider at tattoo shop Portland OR",
   },
 ];
@@ -252,7 +252,7 @@ export default function TattooShopPortlandLP() {
         </div>
 
         <div className="relative z-10 max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[80vh] sm:min-h-[90vh]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[60vh] sm:min-h-[90vh]">
             {/* Left: copy + CTAs */}
             <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-16 py-20 sm:py-16 text-center lg:text-left">
               <div className="flex justify-center lg:justify-start mb-5">
@@ -271,28 +271,12 @@ export default function TattooShopPortlandLP() {
               <p className="font-body text-ht-cream/80 text-lg sm:text-xl max-w-xl mx-auto lg:mx-0 leading-relaxed mb-4">
                 Historic Tattoo is Portland&apos;s top-rated{" "}
                 <strong className="text-ht-cream">walk-in tattoo shop</strong>{" "}
-                — specializing in traditional American tattoos since 2008. No
-                appointment needed.{" "}
+                near SE Division — specializing in traditional American tattoos
+                since 2008. No appointment needed.{" "}
                 <strong className="text-ht-cream">Open 7 days a week.</strong>
               </p>
 
-              {/* Review stars inline */}
-              <div className="flex items-center justify-center lg:justify-start gap-2 mb-6">
-                <div className="flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <TradStar key={i} className="w-4 h-4 text-ht-gold" />
-                  ))}
-                </div>
-                <span className="font-display text-sm text-ht-gold">
-                  {business.reviews.google.rating} Stars
-                </span>
-                <span className="text-ht-cream/40">·</span>
-                <span className="font-body text-sm text-ht-cream/60">
-                  {business.reviews.total}+ Reviews
-                </span>
-              </div>
-
-              {/* CTAs */}
+              {/* CTAs — above reviews on mobile for above-fold visibility */}
               <div className="flex flex-col gap-3 justify-center lg:justify-start mb-6 max-w-sm mx-auto lg:mx-0 lg:max-w-none lg:flex-row">
                 <a
                   href={business.phoneHref}
@@ -339,6 +323,22 @@ export default function TattooShopPortlandLP() {
                   </svg>
                   Get Directions
                 </a>
+              </div>
+
+              {/* Review stars — below CTAs so mobile users see action buttons first */}
+              <div className="flex items-center justify-center lg:justify-start gap-2 mb-6">
+                <div className="flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <TradStar key={i} className="w-4 h-4 text-ht-gold" />
+                  ))}
+                </div>
+                <span className="font-display text-sm text-ht-gold">
+                  {business.reviews.google.rating} Stars
+                </span>
+                <span className="text-ht-cream/40">·</span>
+                <span className="font-body text-sm text-ht-cream/60">
+                  {business.reviews.total}+ Reviews
+                </span>
               </div>
 
               <p className="font-body text-xs text-ht-cream/40 tracking-widest uppercase">
@@ -698,7 +698,7 @@ export default function TattooShopPortlandLP() {
             {/* Map */}
             <div className="rounded-lg overflow-hidden border border-ht-gold/15">
               <iframe
-                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Historic+Tattoo,2001+SE+50th+Ave,Portland,OR+97215&zoom=15"
+                src={`https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&q=Historic+Tattoo,2001+SE+50th+Ave,Portland,OR+97215&zoom=15`}
                 width="100%"
                 height="400"
                 style={{ border: 0 }}

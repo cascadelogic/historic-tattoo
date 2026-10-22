@@ -48,12 +48,22 @@ const faqs: FAQ[] = [
   {
     category: "General",
     question: "How long has Historic Tattoo been open?",
-    answer: "Historic Tattoo has been Portland's home of traditional American tattooing since 2007 — that's over 17 years. Our team of 8 artists brings 109 years of combined experience.",
+    answer: "Historic Tattoo has been Portland's home of traditional American tattooing since 2008 — that's over 18 years. Our team of 8 artists brings 109 years of combined experience.",
   },
   {
     category: "General",
     question: "Where are you located?",
     answer: "We're at 2001 SE 50th Ave, Portland, OR 97215 — in the Foster-Powell neighborhood of SE Portland, near SE Division St. Free street parking is available.",
+  },
+  {
+    category: "General",
+    question: "Is Historic Tattoo the best tattoo shop near me in Portland?",
+    answer: "Historic Tattoo is consistently rated one of the best tattoo shops in Portland, Oregon — with 4.8 stars on Google and 4.5 stars on Yelp across 395+ reviews. Located at 2001 SE 50th Ave in SE Portland, we've been Portland's home of traditional American tattooing since 2008. Walk-ins are welcome every day, no appointment needed.",
+  },
+  {
+    category: "General",
+    question: "Do you do walk-in tattoos near SE Portland?",
+    answer: "Yes! We're open for walk-ins every day from 11am to 7pm at 2001 SE 50th Ave in SE Portland (Foster-Powell neighborhood, near SE Division). No appointment needed — just show up and one of our nine traditional American tattoo artists will take care of you.",
   },
   // Pricing
   {

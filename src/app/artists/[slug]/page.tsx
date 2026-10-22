@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { OrnamentalDivider, StampBadge } from "@/components/Decorations";
+import PortfolioGrid from "@/components/PortfolioGrid";
 import { artists, getArtistBySlug } from "@/data/artists";
 import { business } from "@/data/business";
 import { breadcrumbSchema, personSchema } from "@/lib/schema";
@@ -10,6 +11,8 @@ import { breadcrumbSchema, personSchema } from "@/lib/schema";
 export function generateStaticParams() {
   return artists.map((a) => ({ slug: a.slug }));
 }
+
+const cdnUrl = (src: string, fmt: string) => src.startsWith("/") ? src : `${src}?format=${fmt}`;
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -20,9 +23,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const artist = getArtistBySlug(slug);
   if (!artist) return {};
 
+  const shortBio = artist.bio.split("\n")[0].slice(0, 155);
   return {
     title: `${artist.name} — Tattoo Artist | Historic Tattoo Portland, OR`,
-    description: `${artist.bio} Available ${artist.days} at Historic Tattoo, ${business.address.full}. Walk-ins welcome.`,
+    description: `${shortBio} Available ${artist.days} at Historic Tattoo, ${business.address.full}. Walk-ins welcome.`,
     openGraph: {
       title: `${artist.name} — Historic Tattoo Portland, OR`,
       description: `${artist.specialty} tattoo artist at Historic Tattoo. Available ${artist.days}. Walk-ins welcome daily.`,
@@ -77,7 +81,7 @@ export default async function ArtistPage({ params }: Props) {
             <div className="absolute inset-[8px] rounded-full overflow-hidden">
               {artist.photo ? (
                 <Image
-                  src={`${artist.photo}?format=500w`}
+                  src={cdnUrl(artist.photo!, "500w")}
                   alt={`${artist.name} — tattoo artist at Historic Tattoo Portland`}
                   fill
                   className="object-cover"
@@ -94,17 +98,31 @@ export default async function ArtistPage({ params }: Props) {
           <h1 className="font-display text-5xl sm:text-7xl font-bold uppercase text-ht-cream mb-2">
             {artist.name}
           </h1>
-          <p className="font-display text-sm tracking-widest text-ht-gold uppercase mb-4">{artist.specialty}</p>
-          <p className="font-body text-ht-cream/60 max-w-xl mx-auto mb-6">
-            {artist.bio}
-          </p>
+          <p className="font-display text-sm tracking-widest text-ht-gold uppercase mb-6">{artist.specialty}</p>
+          <div className="max-w-2xl mx-auto mb-8 space-y-4">
+            {artist.bio.split("\n\n").map((paragraph, i) => (
+              <p key={i} className="font-body text-ht-cream/70 leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          {/* Contact details */}
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-sm font-body">
+            <span className="text-ht-cream/50">{artist.days}</span>
+            {artist.email && (
+              <a href={`mailto:${artist.email}`} className="text-ht-cream/50 hover:text-ht-gold transition-colors">{artist.email}</a>
+            )}
+            <a href={artist.ig} target="_blank" rel="noopener noreferrer" className="text-ht-cream/50 hover:text-ht-gold transition-colors">{artist.igHandle}</a>
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href={business.phoneHref} className="btn-primary">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
               Book / Walk In
             </a>
             <a href={artist.ig} target="_blank" rel="noopener noreferrer" className="btn-secondary">
-              Instagram
+              Follow {artist.igHandle}
             </a>
           </div>
           <OrnamentalDivider className="mt-6" />
@@ -118,18 +136,8 @@ export default async function ArtistPage({ params }: Props) {
             <h2 className="font-display text-2xl uppercase tracking-wider text-ht-cream mb-2 text-center">Portfolio</h2>
             <OrnamentalDivider className="mb-10" />
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4 grunge-border p-2 sm:p-4">
-              {artist.portfolio.map((img, i) => (
-                <div key={i} className="relative aspect-square overflow-hidden bg-ht-gray group warm-glow">
-                  <Image
-                    src={`${img.src}?format=750w`}
-                    alt={img.alt}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 45vw, 25vw"
-                  />
-                </div>
-              ))}
+            <div className="grunge-border p-2 sm:p-4">
+              <PortfolioGrid images={artist.portfolio} />
             </div>
           </div>
         </section>

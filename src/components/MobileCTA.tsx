@@ -4,11 +4,14 @@ export default function MobileCTA() {
   return (
     <div
       className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-ht-black/95 backdrop-blur-sm border-t border-ht-red/20 px-4 py-3 safe-bottom"
-      aria-label="Quick contact"
+      role="complementary"
+      aria-label="Quick contact actions"
+      data-mobile-cta
     >
       <div className="flex gap-3 max-w-md mx-auto">
         <a
           href="tel:5032363440"
+          aria-label="Call Historic Tattoo now"
           className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-ht-red text-white font-display text-sm tracking-widest uppercase rounded-md shadow-lg shadow-ht-red/30 active:scale-95 transition-all min-h-[48px]"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -20,6 +23,7 @@ export default function MobileCTA() {
           href="https://maps.google.com/?q=2001+SE+50th+Ave,+Portland,+OR+97215"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Get directions to Historic Tattoo on Google Maps"
           className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-ht-gray border-2 border-ht-cream/20 text-ht-cream font-display text-sm tracking-widest uppercase rounded-md active:scale-95 transition-all min-h-[48px]"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

@@ -205,7 +205,7 @@ export function LightningIcon({ className = "" }: DecorationProps) {
 }
 
 /* ── Circular Stamp Badge ─────────────────────────────
-   For "Est. 2007" or similar text in a circular stamp format.
+   For "Est. 2008" or similar text in a circular stamp format.
 */
 export function StampBadge({
   children,
