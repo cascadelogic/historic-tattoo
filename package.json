@@ -6,12 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit",
-    "test:smoke": "node scripts/smoke.mjs"
+    "lint": "eslint .",
+    "typecheck": "next typegen && tsrs --version && tsrs --noEmit",
+    "test:smoke": "node scripts/smoke.mjs",
+    "prebuild": "npm run typecheck"
   },
   "dependencies": {
-    "next": "15.5.28",
+    "next": "16.4.2",
     "react": "19.2.9",
     "react-dom": "19.2.9",
     "sharp": "0.35.5"
@@ -20,11 +21,13 @@
     "@types/node": "^20",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.2.3",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "autoprefixer": "^10.4.19",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "16.4.2",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.4",
-    "typescript": "^5",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "15.5.28"
+    "tsrs": "0.18.0-ts7.1.0-dev.20260929",
+    "typescript": "npm:@typescript/typescript6@~6.0.2"
   }
 }
